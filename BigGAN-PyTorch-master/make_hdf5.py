@@ -39,6 +39,9 @@ def prepare_parser():
   parser.add_argument(
     '--compression', action='store_true', default=False,
     help='Use LZF compression? (default: %(default)s)')
+  parser.add_argument(
+    '--result_dir', type=str, default='/gpub/temp/imagenet2012/hdf5',
+    help='Default directory to store the result hdf5 file (default: %(default)s)')
   return parser
 
 
@@ -81,7 +84,7 @@ def run(config):
     y = y.numpy()
     # If we're on the first batch, prepare the hdf5
     if i==0:
-      with h5.File(config['data_root'] + '/ILSVRC%i.hdf5' % config['image_size'], 'w') as f:
+      with h5.File(config['result_dir'] + '/ILSVRC%i.hdf5' % config['image_size'], 'w') as f:
         print('Producing dataset of len %d' % len(train_loader.dataset))
         imgs_dset = f.create_dataset('imgs', x.shape,dtype='uint8', maxshape=(len(train_loader.dataset), 3, config['image_size'], config['image_size']),
                                      chunks=(config['chunk_size'], 3, config['image_size'], config['image_size']), compression=config['compression']) 
@@ -92,7 +95,7 @@ def run(config):
         labels_dset[...] = y
     # Else append to the hdf5
     else:
-      with h5.File(config['data_root'] + '/ILSVRC%i.hdf5' % config['image_size'], 'a') as f:
+      with h5.File(config['result_dir'] + '/ILSVRC%i.hdf5' % config['image_size'], 'a') as f:
         f['imgs'].resize(f['imgs'].shape[0] + x.shape[0], axis=0)
         f['imgs'][-x.shape[0]:] = x
         f['labels'].resize(f['labels'].shape[0] + y.shape[0], axis=0)
