@@ -1,0 +1,13 @@
+Time is Wed Sep 4 13:28:04 CST 2019
+Directory is /ghome/fengrl/home/biggan/torch-imp/biggan-torch/BigGAN-PyTorch-master
+This job runs on following nodes:
+Node:G141
+Gpus:G141-gpu7
+G141-gpu6
+G141-gpu5
+G141-gpu4
+G141-gpu3
+G141-gpu2
+G141-gpu1
+G141-gpu0
+CUDA_VISIBLE_DEVICES:7,6,5,4,3,2,1,0
