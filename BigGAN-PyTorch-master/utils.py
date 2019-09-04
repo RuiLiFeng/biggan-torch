@@ -248,7 +248,7 @@ def prepare_parser():
     help='Default location to store all weights, samples, data, and logs '
            ' (default: %(default)s)')
   parser.add_argument(
-    '--data_root', type=str, default='data',
+    '--data_root', type=str, default='/gpub/temp/imagenet2012/hdf5',
     help='Default location where data is stored (default: %(default)s)')
   parser.add_argument(
     '--weights_root', type=str, default='weights',
@@ -530,7 +530,7 @@ def get_data_loaders(dataset, data_root=None, augment=False, batch_size=64,
                      num_workers=8, shuffle=True, load_in_mem=False, hdf5=False,
                      pin_memory=True, drop_last=True, start_itr=0,
                      num_epochs=500, use_multiepoch_sampler=False,
-                     result_dir=None,
+                     result_dir='/gpub/temp/imagenet2012/hdf5',
                      **kwargs):
 
   # Append /FILENAME.hdf5 to root if using hdf5
@@ -601,7 +601,7 @@ def seed_rng(seed):
 def update_config_roots(config):
   if config['base_root']:
     print('Pegging all root folders to base root %s' % config['base_root'])
-    for key in ['data', 'weights', 'logs', 'samples']:
+    for key in ['weights', 'logs', 'samples']:
       config['%s_root' % key] = '%s/%s' % (config['base_root'], key)
   return config
 
