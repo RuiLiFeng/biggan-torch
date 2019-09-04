@@ -63,7 +63,7 @@ def run(config):
                                         shuffle=False,
                                         data_root=config['data_root'],
                                         use_multiepoch_sampler=False,
-                                        result_dir=config["result_dir"]
+                                        result_dir=config["result_dir"],
                                         **kwargs)[0]     
 
   # HDF5 supports chunking and compression. You may want to experiment 
