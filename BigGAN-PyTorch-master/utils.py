@@ -244,7 +244,7 @@ def prepare_parser():
     help='Use a hash of the experiment name instead of the full config '
          '(default: %(default)s)') 
   parser.add_argument(
-    '--base_root', type=str, default='',
+    '--base_root', type=str, default='/gdata/fengrl/biggantorch',
     help='Default location to store all weights, samples, data, and logs '
            ' (default: %(default)s)')
   parser.add_argument(
@@ -530,6 +530,7 @@ def get_data_loaders(dataset, data_root=None, augment=False, batch_size=64,
                      num_workers=8, shuffle=True, load_in_mem=False, hdf5=False,
                      pin_memory=True, drop_last=True, start_itr=0,
                      num_epochs=500, use_multiepoch_sampler=False,
+                     result_dir=None,
                      **kwargs):
 
   # Append /FILENAME.hdf5 to root if using hdf5
@@ -542,7 +543,7 @@ def get_data_loaders(dataset, data_root=None, augment=False, batch_size=64,
   image_size = imsize_dict[dataset]
   # For image folder datasets, name of the file where we store the precomputed
   # image locations to avoid having to walk the dirs every time we load.
-  dataset_kwargs = {'index_filename': '%s_imgs.npz' % dataset}
+  dataset_kwargs = {'index_filename': result_dir + '/%s_imgs.npz' % dataset}
   
   # HDF5 datasets have their own inbuilt transform, no need to train_transform  
   if 'hdf5' in dataset:
