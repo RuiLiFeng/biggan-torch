@@ -59,8 +59,8 @@ class Dense(nn.Module):
         # Used to check input in forward()
         self._in_channels = in_channels
 
-        if len(in_channels) > 1:
-            in_channels = np.prod([d.value for d in in_channels])
+        assert isinstance(in_channels, list)
+        in_channels = np.prod([d.value for d in in_channels])
         self.w = get_weight([in_channels, hidden], gain=gain, use_wscale=use_wscale, lrmul=mul_lrmul)
         self.bias = get_bias(in_channels, bias_lrmul)
 
