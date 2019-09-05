@@ -291,6 +291,7 @@ class Discriminator(nn.Module):
     super(Discriminator, self).__init__()
     # Width multiplier
     self.ch = D_ch
+    print(D_ch)
     # Use Wide D as in BigGAN and SA-GAN or skinny D as in SN-GAN?
     self.D_wide = D_wide
     # Resolution
