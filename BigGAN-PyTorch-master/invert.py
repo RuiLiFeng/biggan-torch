@@ -52,15 +52,13 @@ class Dense(nn.Module):
     def __init__(self, in_channels, hidden,
                  gain=np.sqrt(2), use_wscale=True, mul_lrmul=0.01, bias_lrmul=0.01):
         """
-        :param in_channels: feature shapes, batch_size is not contained, must be list.
+        :param in_channels: feature shapes, batch_size is not contained, must be int.
         :param hidden: Dimension of hidden layers.
         """
         super(Dense, self).__init__()
         # Used to check input in forward()
         self._in_channels = in_channels
 
-        assert isinstance(in_channels, list)
-        in_channels = np.prod([d.value for d in in_channels])
         self.w = get_weight([in_channels, hidden], gain=gain, use_wscale=use_wscale, lrmul=mul_lrmul)
         self.bias = get_bias(in_channels, bias_lrmul)
 
@@ -129,7 +127,7 @@ class Invert(nn.Module):
         self._is_reverse = is_reverse
         self.steps = []
         for i in range(self._depth):
-            self.steps.append(step([self._z_dim], hidden, is_reverse))
+            self.steps.append(step(self._z_dim, hidden, is_reverse))
 
     def forward(self, x):
         for stp in self.steps:
