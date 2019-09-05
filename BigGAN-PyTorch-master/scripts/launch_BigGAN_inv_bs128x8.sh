@@ -1,5 +1,5 @@
 #!/bin/bash
-python train.py \
+python /ghome/fengrl/home/biggan/torch-imp/biggan-torch/BigGAN-PyTorch-master/train.py \
 --model BigGAN_inv \
 --hidden 128 \
 --dataset I128_hdf5 --parallel --shuffle  --num_workers 8 --batch_size 16 \
