@@ -254,7 +254,7 @@ class Generator(nn.Module):
 # Discriminator architecture, same paradigm as G's above
 def D_arch(ch=64, attention='64',ksize='333333', dilation='111111'):
   arch = {}
-  arch[256] = {'in_channels' :  [3] + [ch*item for item in [1, 2, 4, 8, 8, 16]],
+  arch[256] = {'in_channels' :  [3] + [ch * item for item in [1, 2, 4, 8, 8, 16]],
                'out_channels' : [item * ch for item in [1, 2, 4, 8, 8, 16, 16]],
                'downsample' : [True] * 6 + [False],
                'resolution' : [128, 64, 32, 16, 8, 4, 4 ],

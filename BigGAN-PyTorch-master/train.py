@@ -65,6 +65,7 @@ def run(config):
   print('Experiment name is %s' % experiment_name)
 
   # Next, build the model
+  print(config)
   G = model.Generator(**config).to(device)
   D = model.Discriminator(**config).to(device)
   
