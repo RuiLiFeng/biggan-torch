@@ -60,7 +60,7 @@ class Dense(nn.Module):
         self._in_channels = in_channels
 
         self.w = get_weight([in_channels, hidden], gain=gain, use_wscale=use_wscale, lrmul=mul_lrmul)
-        self.bias = get_bias(in_channels, bias_lrmul)
+        self.bias = get_bias([in_channels], bias_lrmul)
 
     def forward(self, x):
         assert x.shape[1:] == self._in_channels
