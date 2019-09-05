@@ -2,7 +2,7 @@
 python train.py \
 --model BigGAN_inv \
 --hidden 128 \
---dataset I128_hdf5 --parallel --shuffle  --num_workers 8 --batch_size 128 \
+--dataset I128_hdf5 --parallel --shuffle  --num_workers 8 --batch_size 16 \
 --num_G_accumulations 8 --num_D_accumulations 8 \
 --num_D_steps 1 --G_lr 1e-4 --D_lr 4e-4 --D_B2 0.999 --G_B2 0.999 \
 --G_attn '64' --D_attn '64' \
