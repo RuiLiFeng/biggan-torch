@@ -35,7 +35,7 @@ class Generator(BigGAN.Generator):
 
 class Discriminator(BigGAN.Discriminator):
     def __init__(self, **kwargs):
-        super(Discriminator, self).__init__(kwargs)
+        super(Discriminator, self).__init__(**kwargs)
 
 
 class G_D(BigGAN.G_D):
