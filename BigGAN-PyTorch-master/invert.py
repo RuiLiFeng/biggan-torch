@@ -33,7 +33,7 @@ def get_weight(shape, gain=np.sqrt(2), use_wscale=False, lrmul=1.0):
         runtime_coef = lrmul
 
     # Create variable.
-    return torch.matmul(P(torch.normal(0, init_std * shape)), runtime_coef)
+    return P(torch.normal(0, init_std * torch.ones(shape))) * runtime_coef
 
 
 def get_bias(in_channel, lrmul=1.0):
