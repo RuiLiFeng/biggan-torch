@@ -8,43 +8,36 @@ from torch.nn import init
 import torch.optim as optim
 import torch.nn.functional as F
 from torch.nn import Parameter as P
-import BigGANdeep
+import BigGAN
 import invert
 import layers
 from sync_batchnorm import SynchronizedBatchNorm2d as SyncBatchNorm2d
 
 
-class Generator_inv(BigGANdeep.Generator):
+class Generator(BigGAN.Generator):
     def __init__(self, hidden, **kwargs):
-        super(Generator_inv, self).__init__(**kwargs)
+        super(Generator, self).__init__(**kwargs)
         self.invert = invert.Invert(z_dim=self.dim_z, depth=8, hidden=hidden)
 
-    def forward(self, z, y):
+    def forward(self, z, y=None):
         # Apply invertible network
         z = self.invert(z)
-        # If hierarchical, concatenate zs and ys
-        if self.hier:
-            z = torch.cat([y, z], 1)
-            y = z
-        # First linear layer
-        h = self.linear(z)
-        # Reshape
-        h = h.view(h.size(0), -1, self.bottom_width, self.bottom_width)
-        # Loop over blocks
-        for index, blocklist in enumerate(self.blocks):
-            # Second inner loop in case block has multiple layers
-            for block in blocklist:
-                h = block(h, y)
+        super(Generator, self).forward(z, y)
 
-        # Apply batchnorm-relu-conv-tanh at output
-        return torch.tanh(self.output_layer(h))
+    def load_state_dict(self, state_dict, strict=True):
+        # Load state for those in state_dict, remain others unchanged.
+        model_dict = self.state_dict()
+        # Check if the network structure is changed.
+        new_dict = {k: v for k, v in state_dict.items() if k in model_dict.keys()}
+        model_dict.update(new_dict)
+        super(Generator, self).load_state_dict(model_dict)
 
 
-class Discriminator(BigGANdeep.Discriminator):
+class Discriminator(BigGAN.Discriminator):
     def __init__(self, **kwargs):
         super(Discriminator, self).__init__(kwargs)
 
 
-class G_D(BigGANdeep.G_D):
+class G_D(BigGAN.G_D):
     def __init__(self, G, D):
         super(G_D, self).__init__(G, D)

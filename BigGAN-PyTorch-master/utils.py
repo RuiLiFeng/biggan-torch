@@ -96,6 +96,9 @@ def prepare_parser():
     '--dim_z', type=int, default=128,
     help='Noise dimensionality: %(default)s)')
   parser.add_argument(
+    '--hidden', type=int, default=128,
+    help='Hidden dimensionality of invert network: %(default)s)')
+  parser.add_argument(
     '--z_var', type=float, default=1.0,
     help='Noise variance: %(default)s)')    
   parser.add_argument(
