@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="77e585e5-0f64-466c-bd47-b7b9b8482e60" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BigGAN-PyTorch-master/inception_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/BigGAN-PyTorch-master/inception_utils.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -58,6 +57,15 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/BigGAN-PyTorch-master/scripts/utils/prepare_data.sh">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="144">
+              <caret line="4" column="62" lean-forward="true" selection-start-line="3" selection-start-column="78" selection-end-line="4" selection-end-column="62" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BigGAN-PyTorch-master/train.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -79,7 +87,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BigGAN-PyTorch-master/inception_utils.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="360">
@@ -146,8 +154,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="109" />
-    <option name="y" value="337" />
+    <option name="x" value="1712" />
+    <option name="y" value="453" />
     <option name="width" value="1936" />
     <option name="height" value="1056" />
   </component>
@@ -173,6 +181,12 @@
               <item name="BigGAN-PyTorch-master" type="b2602c69:ProjectViewProjectNode" />
               <item name="BigGAN-PyTorch-master" type="462c0819:PsiDirectoryNode" />
               <item name="scripts" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BigGAN-PyTorch-master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BigGAN-PyTorch-master" type="462c0819:PsiDirectoryNode" />
+              <item name="scripts" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -216,25 +230,25 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1567399270688</updated>
-      <workItem from="1567399284190" duration="44761000" />
+      <workItem from="1567399284190" duration="45851000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="44761000" />
+    <option name="totallyTimeSpent" value="45851000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="1912" y="-17" width="1096" height="1896" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.27316603" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.07046332" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" />
       <window_info anchor="bottom" id="Version Control" weight="0.32973894" />
       <window_info anchor="bottom" id="Python Console" weight="0.19353008" />
-      <window_info anchor="bottom" id="Terminal" visible="true" weight="0.22342733" />
+      <window_info anchor="bottom" id="Terminal" visible="true" weight="0.116912596" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -352,13 +366,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BigGAN-PyTorch-master/scripts/utils/prepare_data.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="4" column="41" selection-start-line="4" selection-start-column="41" selection-end-line="4" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BigGAN-PyTorch-master/train_fns.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1872">
@@ -411,13 +418,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
           <caret line="10" column="84" selection-start-line="10" selection-start-column="84" selection-end-line="10" selection-end-column="84" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BigGAN-PyTorch-master/scripts/launch_BigGAN_inv_bs128x8.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="684">
-          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
         </state>
       </provider>
     </entry>
@@ -499,6 +499,20 @@
           <folding>
             <element signature="e#738#756#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BigGAN-PyTorch-master/scripts/launch_BigGAN_inv_bs128x8.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="684">
+          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BigGAN-PyTorch-master/scripts/utils/prepare_data.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="4" column="62" lean-forward="true" selection-start-line="3" selection-start-column="78" selection-end-line="4" selection-end-column="62" />
         </state>
       </provider>
     </entry>
