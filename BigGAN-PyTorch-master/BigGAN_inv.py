@@ -17,7 +17,7 @@ from sync_batchnorm import SynchronizedBatchNorm2d as SyncBatchNorm2d
 class Generator(BigGAN.Generator):
     def __init__(self, hidden, **kwargs):
         super(Generator, self).__init__(**kwargs)
-        self.invert = nn.ModuleList.insert(index=0, module=invert.Invert(z_dim=self.dim_z, depth=8, hidden=hidden))
+        self.invert = nn.ModuleList([invert.Invert(z_dim=self.dim_z, depth=8, hidden=hidden)])
 
     def forward(self, z, y=None):
         # Apply invertible network

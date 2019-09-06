@@ -127,8 +127,7 @@ class Invert(nn.Module):
         self._depth = depth
         self._is_reverse = is_reverse
         self.steps = []
-        for i in range(self._depth):
-            self.steps.append(step(self._z_dim, hidden, is_reverse))
+        self.steps = nn.ModuleList([step(self._z_dim, hidden, is_reverse) for _ in range(self._depth)])
 
     def forward(self, x):
         for stp in self.steps:
