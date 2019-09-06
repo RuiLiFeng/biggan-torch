@@ -98,8 +98,12 @@ class step(nn.Module):
         self._is_reverse = is_reverse
         self.phi = phi(in_channels, hidden, in_channels // 2, **kwargs)
 
-    def _reverse(self, h):
-        return h[:, :: -1]
+    def _reverse(self, x, axis=1):
+        indices = [slice(None)] * x.dim()
+        indices[axis] = torch.arange(x.size(axis) - 1, -1, -1,
+                                     dtype=torch.long, device=x.device)
+        return x[tuple(indices)]
+
 
     def forward(self, x):
         assert len(x.shape) == 2
