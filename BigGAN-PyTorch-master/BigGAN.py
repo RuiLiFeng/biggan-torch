@@ -437,6 +437,8 @@ class G_D(nn.Module):
     # If real data is provided, concatenate it with the Generator's output
     # along the batch dimension for improved efficiency.
     else:
+      print(G_z)
+      print(x)
       D_input = torch.cat([G_z, x], 0) if x is not None else G_z
       D_class = torch.cat([gy, dy], 0) if dy is not None else gy
       # Get Discriminator output
