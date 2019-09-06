@@ -37,6 +37,11 @@ class Discriminator(BigGAN.Discriminator):
     def __init__(self, **kwargs):
         super(Discriminator, self).__init__(**kwargs)
 
+    def forward(self, x, y=None):
+        print(x)
+        print(y)
+        super(Discriminator, self).forward(x, y)
+
 
 class G_D(BigGAN.G_D):
     def __init__(self, G, D):
