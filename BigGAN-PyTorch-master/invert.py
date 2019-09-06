@@ -63,7 +63,8 @@ class Dense(nn.Module):
         self.bias = get_bias([in_channels], bias_lrmul)
 
     def forward(self, x):
-        assert x.shape[1:] == self._in_channels
+        assert len(x.shape) == 2
+        assert x.shape[1] == self._in_channels
         if len(x.shape) > 2:
             x = x.reshape([-1, np.prod([d.value for d in x.shape[1:]])])
         self.w = self.w.type(x.dtype)
