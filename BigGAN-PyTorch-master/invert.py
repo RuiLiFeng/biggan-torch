@@ -79,6 +79,7 @@ class step(nn.Module):
         assert len(x.shape) == 2
         assert x.shape[1] == self._in_channels
         x = self._reverse(x)
+        # mid = x.shape[1] // 2
         x1 = x[:, :x.shape[1] // 2]
         x2 = x[:, x.shape[1] // 2:]
         x2 += self.phi(x1)
