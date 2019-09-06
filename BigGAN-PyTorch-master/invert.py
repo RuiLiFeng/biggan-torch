@@ -44,13 +44,13 @@ class Dense(nn.Linear):
 
 
 class phi(nn.Module):
-    def __init__(self, in_channels, hidden, out_channels=None, alpha=0.2, **kwargs):
+    def __init__(self, in_channels, out_channels=None, alpha=0.2, **kwargs):
         super(phi, self).__init__()
         self._in_channels = in_channels
         self._out_channels = in_channels if out_channels is None else out_channels
-        self.dense1 = Dense(in_channels, hidden, **kwargs)
+        self.dense1 = Dense(in_channels, in_channels, **kwargs)
         self.act1 = torch.nn.LeakyReLU(alpha)
-        self.dense2 = Dense(hidden, self._out_channels, **kwargs)
+        self.dense2 = Dense(in_channels, self._out_channels, **kwargs)
         self.act2 = torch.nn.LeakyReLU(alpha)
 
     def forward(self, x):
@@ -62,12 +62,11 @@ class phi(nn.Module):
 
 
 class step(nn.Module):
-    def __init__(self, in_channels, hidden, is_reverse=True, **kwargs):
+    def __init__(self, in_channels, is_reverse=True, **kwargs):
         super(step, self).__init__()
-        self._hidden = hidden
         self._in_channels = in_channels
         self._is_reverse = is_reverse
-        self.phi = phi(in_channels // 2, hidden // 2, in_channels // 2, **kwargs)
+        self.phi = phi(in_channels // 2, in_channels // 2, **kwargs)
 
     def _reverse(self, x, axis=1):
         indices = [slice(None)] * x.dim()
@@ -88,12 +87,11 @@ class step(nn.Module):
 
 
 class Invert(nn.Module):
-    def __init__(self, z_dim, depth, hidden, is_reverse=True):
+    def __init__(self, z_dim, depth, is_reverse=True):
         """
         Invertible network.
         :param z_dim: Must be int.
         :param depth: How many coupling layer are used.
-        :param hidden:
         :param is_reverse:
         """
         super(Invert, self).__init__()
@@ -101,7 +99,7 @@ class Invert(nn.Module):
         self._depth = depth
         self._is_reverse = is_reverse
         self.steps = []
-        self.steps = nn.ModuleList([step(self._z_dim, hidden, is_reverse) for _ in range(self._depth)])
+        self.steps = nn.ModuleList([step(self._z_dim, is_reverse) for _ in range(self._depth)])
 
     def forward(self, x):
         for stp in self.steps:
