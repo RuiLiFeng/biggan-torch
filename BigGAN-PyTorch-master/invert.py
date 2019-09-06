@@ -102,9 +102,8 @@ class step(nn.Module):
         return h[:, :: -1]
 
     def forward(self, x):
-        assert x.shape[1:] == self._in_channels
-        if len(x.shape) > 2:
-            x.reshape([-1, np.prod(x.shape[1:])])
+        assert len(x.shape) == 2
+        assert x.shape[1] == self._in_channels
         x = self._reverse(x)
         x1 = x[:, :x.shape[1] // 2]
         x2 = x[:, x.shape[1] // 2:]
