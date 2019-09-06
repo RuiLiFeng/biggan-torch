@@ -12,62 +12,35 @@ from torch.nn import Parameter as P
 import layers
 
 
-def get_weight(shape, gain=np.sqrt(2), use_wscale=False, lrmul=1.0):
-    """
-    get_weight for dense layers
-    :param shape: shape of weight, [in_channels, hidden]
-    :param gain:
-    :param use_wscale:
-    :param lrmul:
-    :return:
-    """
-    fan_in = np.prod(shape[:-1])  # [kernel, kernel, fmaps_in, fmaps_out] or [in, out]
-    he_std = gain / np.sqrt(fan_in)  # He init
-
-    # Equalized learning rate and custom learning rate multiplier.
-    if use_wscale:
-        init_std = 1.0 / lrmul
-        runtime_coef = he_std * lrmul
-    else:
-        init_std = he_std / lrmul
-        runtime_coef = lrmul
-
-    # Create variable.
-    return P(torch.normal(0, init_std * torch.ones(shape))) * runtime_coef
-
-
-def get_bias(in_channel, lrmul=1.0):
-    """
-    get_bias for dense layer.
-    :param in_channel: Must be list, shape of bias
-    :param lrmul:
-    :return:
-    """
-    if len(in_channel) > 1:
-        in_channel = np.prod([d.value for d in in_channel])
-    return P(torch.zeros(in_channel)) * lrmul
-
-
-class Dense(nn.Module):
+class Dense(nn.Linear):
     def __init__(self, in_channels, hidden,
                  gain=np.sqrt(2), use_wscale=True, mul_lrmul=0.01, bias_lrmul=0.01):
         """
         :param in_channels: feature shapes, batch_size is not contained, must be int.
         :param hidden: Dimension of hidden layers.
         """
-        super(Dense, self).__init__()
-        # Used to check input in forward()
-        self._in_channels = in_channels
+        self._shape = [in_channels, hidden]
+        self._gain = gain
+        self._use_wscale = use_wscale
+        self._mul_lrmul = mul_lrmul
+        self._bias_lrmul = bias_lrmul
+        super(Dense, self).__init__(in_channels, hidden, bias=True)
 
-        self.w = get_weight([in_channels, hidden], gain=gain, use_wscale=use_wscale, lrmul=mul_lrmul)
-        self.bias = get_bias([in_channels], bias_lrmul)
+    def reset_parameters(self):
+        fan_in = self._shape[0]
+        he_std = self._gain / np.sqrt(fan_in)  # He init
+        # Equalized learning rate and custom learning rate multiplier.
+        if self._use_wscale:
+            init_std = 1.0 / self._mul_lrmul
+            self._runtime_coef = he_std * self._mul_lrmul
+        else:
+            init_std = he_std / self._mul_lrmul
+            self._runtime_coef = self._mul_lrmul
+        nn.init.normal_(self.weight, 0, init_std)
+        nn.init.zeros_(self.bias)
 
-    def forward(self, x):
-        assert len(x.shape) == 2
-        assert x.shape[1] == self._in_channels
-        self.w = self.w.type(x.dtype)
-        self.bias = self.bias.type(x.dtype)
-        return torch.matmul(x, self.w) + self.bias
+    def forward(self, input):
+        return F.linear(input, self.weight * self._runtime_coef, self.bias * self._bias_lrmul)
 
 
 class phi(nn.Module):
