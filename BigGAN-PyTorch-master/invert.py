@@ -66,8 +66,7 @@ class step(nn.Module):
         super(step, self).__init__()
         self._in_channels = in_channels
         self._is_reverse = is_reverse
-        # self.phi = phi(in_channels // 2, in_channels // 2, **kwargs)
-        self.phi = phi(64, 64, **kwargs)
+        self.phi = phi(in_channels // 2, in_channels // 2, **kwargs)
 
     def _reverse(self, x, axis=1):
         indices = [slice(None)] * x.dim()
