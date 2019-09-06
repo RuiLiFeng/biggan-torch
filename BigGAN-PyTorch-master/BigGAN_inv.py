@@ -19,7 +19,7 @@ class Generator(BigGAN.Generator):
         super(Generator, self).__init__(**kwargs)
         self.invert = invert.Invert(z_dim=self.dim_z, depth=8)
 
-    def forward(self, z, y=None):
+    def forward(self, z, y):
         # Apply invertible network
         z = self.invert(z)
         super(Generator, self).forward(z, y)
