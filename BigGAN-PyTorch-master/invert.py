@@ -65,8 +65,6 @@ class Dense(nn.Module):
     def forward(self, x):
         assert len(x.shape) == 2
         assert x.shape[1] == self._in_channels
-        if len(x.shape) > 2:
-            x = x.reshape([-1, np.prod([d.value for d in x.shape[1:]])])
         self.w = self.w.type(x.dtype)
         self.bias = self.bias.type(x.dtype)
         return torch.matmul(x, self.w) + self.bias
@@ -79,7 +77,7 @@ class phi(nn.Module):
         self._out_channels = in_channels if out_channels is None else out_channels
         self.dense1 = Dense(in_channels, hidden, **kwargs)
         self.act1 = torch.nn.LeakyReLU(alpha)
-        self.dense2 = Dense(hidden, out_channels, **kwargs)
+        self.dense2 = Dense(hidden, self._out_channels, **kwargs)
         self.act2 = torch.nn.LeakyReLU(alpha)
 
     def forward(self, x):
@@ -91,19 +89,18 @@ class phi(nn.Module):
 
 
 class step(nn.Module):
-    def __init__(self, in_channels, hidden, is_reverse, **kwargs):
+    def __init__(self, in_channels, hidden, is_reverse=True, **kwargs):
         super(step, self).__init__()
         self._hidden = hidden
         self._in_channels = in_channels
         self._is_reverse = is_reverse
-        self.phi = phi(in_channels, hidden, in_channels // 2, **kwargs)
+        self.phi = phi(in_channels, hidden, in_channels, **kwargs)
 
     def _reverse(self, x, axis=1):
         indices = [slice(None)] * x.dim()
         indices[axis] = torch.arange(x.size(axis) - 1, -1, -1,
                                      dtype=torch.long, device=x.device)
         return x[tuple(indices)]
-
 
     def forward(self, x):
         assert len(x.shape) == 2
