@@ -68,6 +68,7 @@ def run(config):
   G = model.Generator(**config).to(device)
   D = model.Discriminator(**config).to(device)
   print(config['hidden'])
+  print(G)
    # If using EMA, prepare it
   if config['ema']:
     print('Preparing EMA for G with decay of {}'.format(config['ema_decay']))
