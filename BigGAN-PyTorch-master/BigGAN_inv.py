@@ -21,7 +21,6 @@ class Generator(BigGAN.Generator):
 
     def forward(self, z, y=None):
         # Apply invertible network
-        print(z.shape)
         z = self.invert(z)
         super(Generator, self).forward(z, y)
 
