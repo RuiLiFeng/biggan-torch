@@ -21,7 +21,7 @@ class Generator(BigGAN.Generator):
 
     def forward(self, z, y=None):
         # Apply invertible network
-        z = self.invert(z)
+        z = self.invert[0](z)
         super(Generator, self).forward(z, y)
 
     def load_state_dict(self, state_dict, strict=True):
