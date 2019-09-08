@@ -717,8 +717,7 @@ def save_weights(G, D, state_dict, weights_root, experiment_name,
 # Load a model's weights, optimizer, and the state_dict
 def load_weights(G, D, state_dict, weights_root, experiment_name, 
                  name_suffix=None, G_ema=None, strict=True, load_optim=True):
-  # root = '/'.join([weights_root, experiment_name])
-  root = weights_root
+  root = '/'.join([weights_root, experiment_name])
   if name_suffix:
     print('Loading %s weights from %s...' % (name_suffix, root))
   else:

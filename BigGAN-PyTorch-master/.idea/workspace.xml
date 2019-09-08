@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0b70c967-ed11-4d50-b707-375ab794afcc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/encoder.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/losses.py" beforeDir="false" afterPath="$PROJECT_DIR$/losses.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/launch_BigGAN_inv_bs256x8.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/launch_BigGAN_inv_bs256x8.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/launch_BigGAN_inv_finetune_bs256x8.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/launch_BigGAN_inv_finetune_bs256x8.sh" afterDir="false" />
-    </list>
+    <list default="true" id="0b70c967-ed11-4d50-b707-375ab794afcc" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,8 +13,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/train.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3021">
-              <caret line="159" column="58" lean-forward="true" selection-start-line="159" selection-start-column="58" selection-end-line="159" selection-end-column="58" />
+            <state relative-caret-position="402">
+              <caret line="101" column="18" selection-start-line="101" selection-start-column="18" selection-end-line="101" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/utils.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="687" column="4" selection-start-line="687" selection-start-column="4" selection-end-line="687" selection-end-column="4" />
+              <folding>
+                <element signature="e#247#284#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -40,8 +46,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/launch_BigGAN_inv_bs256x8.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
-              <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
+            <state relative-caret-position="486">
+              <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
             </state>
           </provider>
         </entry>
@@ -55,7 +61,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/launch_cifar_ema.sh">
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
@@ -63,8 +69,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/dgxlaunch_BigGAN_bs256x8.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="17" lean-forward="true" selection-start-line="2" selection-end-line="17" />
+            <state relative-caret-position="135">
+              <caret line="5" column="25" lean-forward="true" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -77,17 +83,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/launch_BigGAN_inv_finetune_bs256x8.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="540">
-              <caret line="20" selection-start-line="20" selection-end-line="20" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/utils/dprepare_data.sh">
-          <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="108">
-              <caret line="4" column="35" selection-start-line="4" selection-start-column="35" selection-end-line="4" selection-end-column="35" />
+              <caret line="4" column="8" lean-forward="true" selection-start-line="4" selection-start-column="8" selection-end-line="4" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -128,6 +125,7 @@
       <find>use_multiepoch</find>
       <find>core</find>
       <find>name</find>
+      <find>load_wei</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -142,12 +140,12 @@
         <option value="$PROJECT_DIR$/invert.py" />
         <option value="$PROJECT_DIR$/train.py" />
         <option value="$PROJECT_DIR$/scripts/launch_BigGAN_bs256x8.sh" />
-        <option value="$PROJECT_DIR$/utils.py" />
         <option value="$PROJECT_DIR$/scripts/utils/dprepare_data.sh" />
         <option value="$PROJECT_DIR$/losses.py" />
         <option value="$PROJECT_DIR$/encoder.py" />
         <option value="$PROJECT_DIR$/scripts/launch_BigGAN_inv_bs256x8.sh" />
         <option value="$PROJECT_DIR$/scripts/launch_BigGAN_inv_finetune_bs256x8.sh" />
+        <option value="$PROJECT_DIR$/utils.py" />
       </list>
     </option>
   </component>
@@ -225,12 +223,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="45439000" />
+    <option name="totallyTimeSpent" value="45976000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1513" height="973" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19492108" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19492108" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -244,7 +243,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32977462" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.12218268" />
+      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.12218268" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.29537368" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -333,16 +332,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="269" column="22" lean-forward="true" selection-start-line="269" selection-start-column="22" selection-end-line="269" selection-end-column="22" />
-          <folding>
-            <element signature="e#247#284#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BigGANdeep.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-486">
@@ -410,13 +399,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/train.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3021">
-          <caret line="159" column="58" lean-forward="true" selection-start-line="159" selection-start-column="58" selection-end-line="159" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/launch_BigGAN_deep.sh">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -429,27 +411,44 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/dgxlaunch_BigGAN_bs256x8.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="17" lean-forward="true" selection-start-line="2" selection-end-line="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/launch_BigGAN_inv_bs256x8.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/launch_BigGAN_inv_finetune_bs256x8.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="20" selection-start-line="20" selection-end-line="20" />
+        <state relative-caret-position="135">
+          <caret line="5" column="25" lean-forward="true" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/launch_cifar_ema.sh">
       <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/train.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="402">
+          <caret line="101" column="18" selection-start-line="101" selection-start-column="18" selection-end-line="101" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/launch_BigGAN_inv_bs256x8.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/launch_BigGAN_inv_finetune_bs256x8.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="4" column="8" lean-forward="true" selection-start-line="4" selection-start-column="8" selection-end-line="4" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="687" column="4" selection-start-line="687" selection-start-column="4" selection-end-line="687" selection-end-column="4" />
+          <folding>
+            <element signature="e#247#284#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
     </entry>
   </component>
 </project>
