@@ -3,6 +3,7 @@ python /ghome/fengrl/home/biggan/torch-imp/biggan-torch/BigGAN-PyTorch-master/tr
 --model BigGAN_inv \
 --experiment_name BigGAN_inv_finetue100k \
 --resume --load_weights 100k \
+--num_epochs 165 \
 --dataset I128_hdf5 --parallel --shuffle  --num_workers 0 --batch_size 256 \
 --num_G_accumulations 8 --num_D_accumulations 8 \
 --num_D_steps 1 --G_lr 1e-4 --D_lr 4e-4 --D_B2 0.999 --G_B2 0.999 \
