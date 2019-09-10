@@ -40,7 +40,19 @@ class Discriminator(BigGAN.Discriminator):
 
     def forward(self, x, y=None):
         if self.unconditional:
-            return super(Discriminator, self).forward(x, None)
+            # Stick x into h for cleaner for loops without flow control
+            h = x
+            # Loop over blocks
+            for index, blocklist in enumerate(self.blocks):
+                for block in blocklist:
+                    h = block(h)
+            # Apply global sum pooling as in SN-GAN
+            h = torch.sum(self.activation(h), [2, 3])
+            # Get initial class-unconditional output
+            out = self.linear(h)
+            # Get projection of final featureset onto class vectors and add to evidence
+            out = out
+            return out
         else:
             return super(Discriminator, self).forward(x, y)
 
