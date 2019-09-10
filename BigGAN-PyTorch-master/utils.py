@@ -63,6 +63,10 @@ def prepare_parser():
     '--model', type=str, default='BigGAN',
     help='Name of the model module (default: %(default)s)')
   parser.add_argument(
+    '--unconditional', type=bool, default=False,
+    help='Whether use unconditional discriminator (default: %(default)s)'
+  )
+  parser.add_argument(
     '--G_param', type=str, default='SN',
     help='Parameterization style to use for G, spectral norm (SN) or SVD (SVD)'
           ' or None (default: %(default)s)')

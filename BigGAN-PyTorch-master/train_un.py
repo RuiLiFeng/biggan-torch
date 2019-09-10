@@ -67,7 +67,7 @@ def run(config):
   # Next, build the model
   G = model.Generator(**config).to(device)
   D = model.Discriminator(**config).to(device)
-  
+
    # If using EMA, prepare it
   if config['ema']:
     print('Preparing EMA for G with decay of {}'.format(config['ema_decay']))
@@ -99,9 +99,13 @@ def run(config):
   # If loading from a pre-trained model, load weights
   if config['resume']:
     print('Loading weights...')
+    # utils.load_weights(G, D, state_dict,
+    #                    config['weights_root'], experiment_name,
+    #                    config['load_weights'] if config['load_weights'] else None,
+    #                    G_ema if config['ema'] else None)
     utils.load_weights(G, D, state_dict,
-                       config['weights_root'], experiment_name, 
-                       config['load_weights'] if config['load_weights'] else None,
+                       config['weights_root'], config['load_weights'],
+                       None,
                        G_ema if config['ema'] else None)
 
   # If parallel, parallelize the GD module
@@ -134,7 +138,10 @@ def run(config):
                                       'start_itr': state_dict['itr']})
 
   # Prepare inception metrics: FID and IS
-  get_inception_metrics = inception_utils.prepare_inception_metrics(config['dataset'], config['parallel'], config['no_fid'])
+  get_inception_metrics = inception_utils.prepare_inception_metrics(config['dataset'],
+                                                                    config['parallel'],
+                                                                    config['data_root'],
+                                                                    config['no_fid'])
 
   # Prepare noise and randomly sampled label arrays
   # Allow for different batch sizes in G
@@ -181,7 +188,7 @@ def run(config):
         x, y = x.to(device).half(), y.to(device)
       else:
         x, y = x.to(device), y.to(device)
-      metrics = train(x, y)
+      metrics = train(x, None)
       train_log.log(itr=int(state_dict['itr']), **metrics)
       
       # Every sv_log_interval, log singular values

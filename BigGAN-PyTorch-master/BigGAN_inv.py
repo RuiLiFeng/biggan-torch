@@ -34,10 +34,18 @@ class Generator(BigGAN.Generator):
 
 
 class Discriminator(BigGAN.Discriminator):
-    def __init__(self, **kwargs):
+    def __init__(self, unconditional=False, **kwargs):
         super(Discriminator, self).__init__(**kwargs)
+        self.unconditional = unconditional
+
+    def forward(self, x, y=None):
+        if self.unconditional:
+            return super(Discriminator, self).forward(x, None)
+        else:
+            return super(Discriminator, self).forward(x, y)
 
 
 class G_D(BigGAN.G_D):
     def __init__(self, G, D):
         super(G_D, self).__init__(G, D)
+
