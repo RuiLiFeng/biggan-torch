@@ -291,9 +291,51 @@ def D_arch(ch=64, attention='64', ksize='333333', dilation='111111'):
     return arch
 
 
+class ResBlock(nn.Module):
+    def __init__(self, inplanes=1, planes=1):
+        super(ResBlock, self).__init__()
+        if inplanes != planes:
+            self.shortcut = nn.Sequential(
+                nn.Conv1d(inplanes, planes, 1),
+                nn.BatchNorm1d(planes))
+        else:
+            self.shortcut = nn.Identity()
+        self.res_layer = nn.Sequential(
+            nn.Conv1d(inplanes, planes, 1),
+            nn.BatchNorm1d(planes),
+            nn.ReLU(inplace=True),
+            nn.Conv1d(planes, planes, 1),
+            nn.BatchNorm1d(planes)
+        )
+        self.relu = nn.ReLU(inplace=True)
+
+    def forward(self, x):
+        identity = self.shortcut(x)
+        x = self.res_layer(x)
+        x += identity
+        x = self.relu(x)
+        return x
+
+
+class Dislatent(nn.Module):
+    def __init__(self, latent_dim=120, depth=4):
+        super(Dislatent, self).__init__()
+        self.layers = torch.nn.ModuleList([ResBlock() for _ in range(depth)])
+        self.out = torch.nn.Sequential(torch.nn.Linear(latent_dim, 1),
+                                       torch.nn.ReLU(inplace=True))
+
+    def forward(self, z):
+        z = z.reshape([z.shape[0], 1, z.shape[1]])
+        for layer in self.layers:
+            z = layer(z)
+        z = z.reshape([z.shape[0], -1])
+        out = self.out(z)
+        return out
+
+
 class Discriminator(nn.Module):
 
-    def __init__(self, D_ch=64, D_wide=True, resolution=128,
+    def __init__(self, D_ch=64, D_wide=True, resolution=128, dim_z=120,
                  D_kernel_size=3, D_attn='64', n_classes=1000,
                  num_D_SVs=1, num_D_SV_itrs=1, D_activation=nn.ReLU(inplace=False),
                  D_lr=2e-4, D_B1=0.0, D_B2=0.999, adam_eps=1e-8,
@@ -363,6 +405,9 @@ class Discriminator(nn.Module):
         # Embedding for projection discrimination
         self.embed = self.which_embedding(self.n_classes, self.arch['out_channels'][-1])
 
+        # Discriminator for latents to tie encoder and invert
+        self.dis_v = Dislatent(latent_dim=dim_z)
+
         # Initialize weights
         if not skip_init:
             self.init_weights()
@@ -399,7 +444,7 @@ class Discriminator(nn.Module):
                 self.param_count += sum([p.data.nelement() for p in module.parameters()])
         print('Param count for D''s initialized parameters: %d' % self.param_count)
 
-    def forward(self, x, y=None):
+    def forward(self, x, v, y=None):
         # Stick x into h for cleaner for loops without flow control
         h = x
         # Loop over blocks
@@ -411,14 +456,20 @@ class Discriminator(nn.Module):
         # Get initial class-unconditional output
         out = self.linear(h)
         # Get projection of final featureset onto class vectors and add to evidence
-        out = out + torch.sum(self.embed(y) * h, 1, keepdim=True)
-        return out
+        # If y is None, then assgin no label logits to the outputs
+        if y is None:
+            embed_y = 0
+        else:
+            embed_y = self.embed(y)
+        out = out + torch.sum(embed_y * h, 1, keepdim=True)
+        out_v = self.dis_v(v)
+        return out, out_v
 
 
 # Parallelized G_D to minimize cross-gpu communication
 # Without this, Generator outputs would get all-gathered and then rebroadcast.
 class G_D(nn.Module):
-    def __init__(self, G, D):
+    def __init__(self, G: Generator, D):
         super(G_D, self).__init__()
         self.G = G
         self.D = D
@@ -429,34 +480,45 @@ class G_D(nn.Module):
         with torch.set_grad_enabled(train_G):
             # Get Generator output given noise
             G_z = self.G(z, self.G.shared(gy))
+            iv = self.G.invert(z)
+            if x is not None:
+                ev = self.G.encoder(x)
             # Cast as necessary
             if self.G.fp16 and not self.D.fp16:
                 G_z = G_z.float()
+                iv = iv.float()
+                if x is not None:
+                    ev = ev.float()
             if self.D.fp16 and not self.G.fp16:
                 G_z = G_z.half()
+                iv = iv.half()
+                if x is not None:
+                    ev = ev.half()
         # Split_D means to run D once with real data and once with fake,
         # rather than concatenating along the batch dimension.
         if split_D:
-            D_fake = self.D(G_z, gy)
+            D_fake, v_inv = self.D(G_z, iv, gy)
             if x is not None:
-                D_real = self.D(x, dy)
-                return D_fake, D_real
+                D_real, v_en = self.D(x, ev, dy)
+                return D_fake, D_real, v_inv, v_en
             else:
                 if return_G_z:
-                    return D_fake, G_z
+                    return D_fake, G_z, v_inv
                 else:
-                    return D_fake
+                    return D_fake, v_inv
         # If real data is provided, concatenate it with the Generator's output
         # along the batch dimension for improved efficiency.
         else:
             D_input = torch.cat([G_z, x], 0) if x is not None else G_z
             D_class = torch.cat([gy, dy], 0) if dy is not None else gy
+            D_v = torch.cat([self.G.invert(z), self.G.encoder(x)], 0) if x is not None else self.G.invert(z)
             # Get Discriminator output
-            D_out = self.D(D_input, D_class)
+            D_out, D_out_v = self.D(D_input, D_v, D_class)
             if x is not None:
-                return torch.split(D_out, [G_z.shape[0], x.shape[0]])  # D_fake, D_real
+                return torch.split(D_out, [G_z.shape[0], x.shape[0]]), \
+                       torch.split(D_out_v, [z.shape[0], x.shape[0]])  # D_fake, D_real, v_inv, v_en
             else:
                 if return_G_z:
-                    return D_out, G_z
+                    return D_out, G_z, D_out_v
                 else:
-                    return D_out
+                    return D_out, D_out_v

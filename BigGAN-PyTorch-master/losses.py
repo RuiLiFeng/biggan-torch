@@ -29,10 +29,6 @@ def loss_hinge_gen(dis_fake):
   return loss
 
 
-def loss_reconstrcution(dis_fake, dis_real):
-  pass
-
-
 # Default to hinge loss
 generator_loss = loss_hinge_gen
 discriminator_loss = loss_hinge_dis
