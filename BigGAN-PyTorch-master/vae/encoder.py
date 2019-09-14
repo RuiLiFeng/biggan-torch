@@ -104,7 +104,7 @@ class ResBlock(nn.Module):
         return x
 
 
-def Encoder(arch='ResBlock_inv', latent_dim=120):
+def Encoder(arch='ResBlock_inv', latent_dim=120, labeled_percent=0.1):
     encoder_dict = {"ResBlock_inv": Encoder_inv, "ResBlock_rand": Encoder_rd}
     assert arch in encoder_dict.keys()
     return encoder_dict[arch](latent_dim)

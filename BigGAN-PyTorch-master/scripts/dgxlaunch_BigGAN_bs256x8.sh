@@ -1,6 +1,6 @@
 #!/bin/bash
 python /ghome/fengrl/home/biggan/torch-imp/biggan-torch/BigGAN-PyTorch-master/train.py \
---dataset I128_hdf5 --parallel --shuffle  --num_workers 0 --batch_size 256 \
+--dataset I128_hdf5 --parallel --shuffle  --num_workers 8 --batch_size 256 \
 --num_G_accumulations 8 --num_D_accumulations 8 \
 --num_D_steps 1 --G_lr 1e-4 --D_lr 4e-4 --D_B2 0.999 --G_B2 0.999 \
 --G_attn 64 --D_attn 64 \
@@ -15,3 +15,4 @@ python /ghome/fengrl/home/biggan/torch-imp/biggan-torch/BigGAN-PyTorch-master/tr
 --ema --use_ema --ema_start 20000 \
 --test_every 2000 --save_every 1000 --num_best_copies 5 --num_save_copies 2 --seed 0 \
 --use_multiepoch_sampler \
+--experiment_name biggantest \
