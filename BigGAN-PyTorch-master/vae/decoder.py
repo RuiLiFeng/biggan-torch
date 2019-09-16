@@ -236,6 +236,7 @@ class Generator(nn.Module):
         if mode == 'inv':
             z = self.invert(z)
         elif mode == 'encode':
+            assert x is not None
             z = self.encoder(x)
         else:
             raise ValueError("Unsupported mode: {}".format(mode))
