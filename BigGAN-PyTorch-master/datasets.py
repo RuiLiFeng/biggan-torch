@@ -238,12 +238,11 @@ class ILSVRC_HDF5(data.Dataset):
     if self.target_transform is not None:
       target = self.target_transform(target)
 
-    if self.keep_hash is not None and not self.keep_hash[index]:
-      target = None
-    else:
-      target = int(target)
+    if self.keep_hash is not None:
+      if not self.keep_hash[index]:
+        target = -1
     
-    return img, target
+    return img, int(target)
 
   def __len__(self):
       return self.num_imgs
