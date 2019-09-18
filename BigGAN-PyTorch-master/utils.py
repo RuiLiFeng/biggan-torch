@@ -535,6 +535,7 @@ def get_data_loaders(dataset, data_root=None, augment=False, batch_size=64,
                      pin_memory=True, drop_last=True, start_itr=0,
                      num_epochs=500, use_multiepoch_sampler=False,
                      result_dir='/gpub/temp/imagenet2012/hdf5',
+                     keep_prop=1,
                      **kwargs):
 
   # Append /FILENAME.hdf5 to root if using hdf5
@@ -573,7 +574,7 @@ def get_data_loaders(dataset, data_root=None, augment=False, batch_size=64,
                      transforms.ToTensor(),
                      transforms.Normalize(norm_mean, norm_std)])
   train_set = which_dataset(root=data_root, transform=train_transform,
-                            load_in_mem=load_in_mem, **dataset_kwargs)
+                            load_in_mem=load_in_mem, keep_prop=keep_prop, **dataset_kwargs)
 
   # Prepare loader; the loaders list is for forward compatibility with
   # using validation / test splits.

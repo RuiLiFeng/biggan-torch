@@ -183,8 +183,8 @@ import h5py as h5
 import torch
 class ILSVRC_HDF5(data.Dataset):
   def __init__(self, root, transform=None, target_transform=None,
-               load_in_mem=False, train=True,download=False, validate_seed=0,
-               val_split=0, **kwargs): # last four are dummies
+               load_in_mem=False, train=True, keep_prop=1, download=False, validate_seed=0,
+               val_split=0, **kwargs):  # last four are dummies
       
     self.root = root
     self.num_imgs = len(h5.File(root, 'r')['labels'])
@@ -197,6 +197,11 @@ class ILSVRC_HDF5(data.Dataset):
     
     # load the entire dataset into memory? 
     self.load_in_mem = load_in_mem
+
+    if keep_prop != 1:
+      self.keep_hash = (np.random.choice([0, 1], size=self.num_imgs, p=[1-keep_prop, keep_prop]) == 1)
+    else:
+      self.keep_hash = None
     
     # If loading into memory, do so now
     if self.load_in_mem:
@@ -232,6 +237,10 @@ class ILSVRC_HDF5(data.Dataset):
     
     if self.target_transform is not None:
       target = self.target_transform(target)
+
+    if self.keep_hash:
+      if not self.keep_hash[index]:
+        target = -1
     
     return img, int(target)
 
