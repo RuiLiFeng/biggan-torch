@@ -2,6 +2,7 @@ import os
 import sys
 from argparse import ArgumentParser
 import h5py as h5
+import utils
 
 import numpy as np
 
@@ -28,6 +29,12 @@ def prepare_parser():
     parser.add_argument(
         '--keep_prop', type=float, default=0.01,
         help='Default keep prop for labeled data in the whole dataset (default: %(default)s)')
+    parser.add_argument(
+        '--num_workers', type=int, default=16,
+        help='Defualt num_works for DataLoader (default: %(default)s)')
+    parser.add_argument(
+        '--batch_size', type=int, default=1,
+        help='Default batch size for DataLoader (default: %(default)s)')
     return parser
 
 
@@ -36,9 +43,17 @@ def run(config):
     config['compression'] = 'lzf' if config['compression'] else None  # No compression; can also use 'lzf'
 
     # Get datasets:
-    FullDset = h5.File(config['data_root'] + '/' + config['dataset'], 'r')
-    img_shape = FullDset['imgs'][0].shape
-    label_shape = FullDset['labels'][0].shape
+    kwargs = {'num_workers': config['num_workers'], 'pin_memory': False, 'drop_last': False}
+    FullDset = utils.get_data_loaders(dataset=config['dataset'],
+                                      batch_size=config['batch_size'],
+                                      shuffle=False,
+                                      data_root=config['data_root'],
+                                      use_multiepoch_sampler=False,
+                                      result_dir=config["result_dir"],
+                                      **kwargs)[0]
+    img_shape = FullDset.dataset['imgs'][0].shape
+    label_shape = FullDset.dataset['labels'][0].shape
+    print('Start generating keep table with keep prop %f...' % config['keep_prop'])
     KeepTable, RemoveTable = generate_keep_table(FullDset['labels'][:], config['keep_prop'])
 
     print('Starting to convert %s into an departed HDF5 file with keep porp %f, chunk size %i and compression %s...'
