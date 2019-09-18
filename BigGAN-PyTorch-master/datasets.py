@@ -238,7 +238,7 @@ class ILSVRC_HDF5(data.Dataset):
     if self.target_transform is not None:
       target = self.target_transform(target)
 
-    if self.keep_hash:
+    if self.keep_hash is not None:
       if not self.keep_hash[index]:
         target = -1
     
