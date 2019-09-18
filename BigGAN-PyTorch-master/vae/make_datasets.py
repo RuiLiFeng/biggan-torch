@@ -6,9 +6,6 @@ import h5py as h5
 import numpy as np
 
 
-import utils
-
-
 def prepare_parser():
     usage = 'Parser for ImageNet HDF5 scripts.'
     parser = ArgumentParser(description=usage)
