@@ -2,7 +2,8 @@ import os
 import sys
 from argparse import ArgumentParser
 import h5py as h5
-import utils
+sys.path.append('..')
+from utils import get_data_loaders
 
 import numpy as np
 
@@ -44,13 +45,13 @@ def run(config):
 
     # Get datasets:
     kwargs = {'num_workers': config['num_workers'], 'pin_memory': False, 'drop_last': False}
-    FullDset = utils.get_data_loaders(dataset=config['dataset'],
-                                      batch_size=config['batch_size'],
-                                      shuffle=False,
-                                      data_root=config['data_root'],
-                                      use_multiepoch_sampler=False,
-                                      result_dir=config["result_dir"],
-                                      **kwargs)[0]
+    FullDset = get_data_loaders(dataset=config['dataset'],
+                                batch_size=config['batch_size'],
+                                shuffle=False,
+                                data_root=config['data_root'],
+                                use_multiepoch_sampler=False,
+                                result_dir=config["result_dir"],
+                                **kwargs)[0]
     img_shape = FullDset.dataset['imgs'][0].shape
     label_shape = FullDset.dataset['labels'][0].shape
     print('Start generating keep table with keep prop %f...' % config['keep_prop'])
