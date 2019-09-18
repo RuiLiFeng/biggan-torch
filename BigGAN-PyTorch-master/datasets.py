@@ -240,7 +240,7 @@ class ILSVRC_HDF5(data.Dataset):
 
     if self.keep_hash is not None:
       if not self.keep_hash[index]:
-        target = -1
+        target = -1  # default value for None type
     
     return img, int(target)
 
