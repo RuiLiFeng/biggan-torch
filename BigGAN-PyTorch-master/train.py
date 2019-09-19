@@ -99,14 +99,14 @@ def run(config):
   # If loading from a pre-trained model, load weights
   if config['resume']:
     print('Loading weights...')
-    # utils.load_weights(G, D, state_dict,
-    #                    config['weights_root'], experiment_name,
-    #                    config['load_weights'] if config['load_weights'] else None,
-    #                    G_ema if config['ema'] else None)
     utils.load_weights(G, D, state_dict,
-                       config['weights_root'], config['load_weights'],
-                       None,
+                       config['weights_root'], experiment_name,
+                       config['load_weights'] if config['load_weights'] else None,
                        G_ema if config['ema'] else None)
+    # utils.load_weights(G, D, state_dict,
+    #                    config['weights_root'], config['load_weights'],
+    #                    None,
+    #                    G_ema if config['ema'] else None)
 
   # If parallel, parallelize the GD module
   if config['parallel']:

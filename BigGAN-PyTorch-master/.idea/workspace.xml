@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0b70c967-ed11-4d50-b707-375ab794afcc" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/make_hdf5.py" beforeDir="false" afterPath="$PROJECT_DIR$/make_hdf5.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vae/make_datasets.py" beforeDir="false" afterPath="$PROJECT_DIR$/vae/make_datasets.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,15 +16,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/train.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4239">
-              <caret line="177" column="37" selection-start-line="177" selection-start-column="37" selection-end-line="177" selection-end-column="37" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/launch_BigGAN_bs256x8.sh">
           <provider selected="true" editor-type-id="text-editor">
@@ -47,11 +37,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="13878">
-              <caret line="532" column="4" selection-start-line="532" selection-start-column="4" selection-end-line="532" selection-end-column="4" />
+            <state relative-caret-position="192">
+              <caret line="336" column="12" selection-start-line="336" selection-start-column="6" selection-end-line="336" selection-end-column="12" />
               <folding>
                 <element signature="e#247#284#0" expanded="true" />
               </folding>
@@ -101,16 +91,23 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/vae/make_datasets.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/make_datasets.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1539">
-              <caret line="57" column="35" lean-forward="true" selection-start-line="57" selection-start-column="35" selection-end-line="57" selection-end-column="35" />
-              <folding>
-                <element signature="e#0#9#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="108">
+              <caret line="4" selection-start-line="4" selection-end-line="4" />
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/__init__.py">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vae/__init__.py">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -183,6 +180,8 @@
         <option value="$PROJECT_DIR$/vae/load_data.py" />
         <option value="$PROJECT_DIR$/make_hdf5.py" />
         <option value="$PROJECT_DIR$/vae/make_datasets.py" />
+        <option value="$PROJECT_DIR$/make_datasets.py" />
+        <option value="$PROJECT_DIR$/__init__.py" />
       </list>
     </option>
   </component>
@@ -208,17 +207,6 @@
             <path>
               <item name="BigGAN-PyTorch-master" type="b2602c69:ProjectViewProjectNode" />
               <item name="BigGAN-PyTorch-master" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BigGAN-PyTorch-master" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BigGAN-PyTorch-master" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BigGAN-PyTorch-master" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BigGAN-PyTorch-master" type="462c0819:PsiDirectoryNode" />
               <item name="vae" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -237,11 +225,13 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\program\BigGAN-torch\biggan-torch\BigGAN-PyTorch-master\vae" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\program\BigGAN-torch\biggan-torch\BigGAN-PyTorch-master" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\program\biggan\biggan-torch\BigGAN-PyTorch-master\vae" />
+      <recent name="D:\program\biggan\biggan-torch\BigGAN-PyTorch-master" />
+      <recent name="E:\program\BigGAN-torch\biggan-torch\BigGAN-PyTorch-master\vae" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -271,12 +261,12 @@
       <workItem from="1567948052150" duration="1975000" />
       <workItem from="1568017099464" duration="20812000" />
       <workItem from="1568212276997" duration="15221000" />
-      <workItem from="1568868837676" duration="604000" />
+      <workItem from="1568868837676" duration="1537000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="120581000" />
+    <option name="totallyTimeSpent" value="121514000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -288,9 +278,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1513" height="973" extended-state="6" />
+    <frame x="-7" y="-7" width="1513" height="973" extended-state="7" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14001372" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14001372" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" weight="0.32944405" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -304,7 +295,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32973894" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.22064057" />
+      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.22064057" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.22538553" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -319,7 +310,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/scripts/launch_BigGAN_inv_bs128x8.sh" />
     <entry file="file://D:/conda/envs/pytorch/Lib/site-packages/torch/nn/modules/linear.py" />
     <entry file="file://$PROJECT_DIR$/scripts/launch_SAGAN_bs128x2_ema.sh">
       <provider selected="true" editor-type-id="text-editor" />
@@ -553,16 +543,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="13878">
-          <caret line="532" column="4" selection-start-line="532" selection-start-column="4" selection-end-line="532" selection-end-column="4" />
-          <folding>
-            <element signature="e#247#284#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/datasets.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5940">
@@ -607,12 +587,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vae/make_datasets.py">
+    <entry file="file://$PROJECT_DIR$/make_datasets.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1539">
-          <caret line="57" column="35" lean-forward="true" selection-start-line="57" selection-start-column="35" selection-end-line="57" selection-end-column="35" />
+        <state relative-caret-position="108">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vae/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="336" column="12" selection-start-line="336" selection-start-column="6" selection-end-line="336" selection-end-column="12" />
           <folding>
-            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#247#284#0" expanded="true" />
           </folding>
         </state>
       </provider>
