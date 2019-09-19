@@ -54,7 +54,7 @@ def run(config):
     FullDset = FullDsetLoader.dataset
     img_shape, label_shape = FullDset[0]
     img_shape = img_shape.shape
-    label_shape = label_shape.shape
+    label_shape = (1,)
     print('Start generating keep table with keep prop %f...' % config['keep_prop'])
     KeepTable, RemoveTable = generate_keep_table(FullDset['labels'][:], config['keep_prop'])
 
