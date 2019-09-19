@@ -64,8 +64,7 @@ def run(config):
                                         data_root=config['data_root'],
                                         use_multiepoch_sampler=False,
                                         result_dir=config["result_dir"],
-                                        **kwargs)[0]     
-
+                                        **kwargs)[0]
   # HDF5 supports chunking and compression. You may want to experiment 
   # with different chunk sizes to see how it runs on your machines.
   # Chunk Size/compression     Read speed @ 256x256   Read speed @ 128x128  Filesize @ 128x128    Time to write @128x128

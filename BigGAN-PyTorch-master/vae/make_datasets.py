@@ -44,16 +44,18 @@ def run(config):
     config['compression'] = 'lzf' if config['compression'] else None  # No compression; can also use 'lzf'
 
     # Get datasets:
-    kwargs = {'num_workers': config['num_workers'], 'pin_memory': False, 'drop_last': False}
-    FullDset = get_data_loaders(dataset=config['dataset'],
-                                batch_size=config['batch_size'],
-                                shuffle=False,
-                                data_root=config['data_root'],
-                                use_multiepoch_sampler=False,
-                                result_dir=config["result_dir"],
-                                **kwargs)[0]
-    img_shape = FullDset.dataset['imgs'][0].shape
-    label_shape = FullDset.dataset['labels'][0].shape
+    kwargs = {'num_workers': config['num_workers'], 'pin_memory': False, 'drop_last': False, 'load_in_mem': True}
+    FullDsetLoader = get_data_loaders(dataset=config['dataset'],
+                                      batch_size=config['batch_size'],
+                                      shuffle=False,
+                                      data_root=config['data_root'],
+                                      use_multiepoch_sampler=False,
+                                      result_dir=config["result_dir"],
+                                      **kwargs)[0]
+    FullDset = FullDsetLoader.dataset
+    img_shape, label_shape = FullDset[0]
+    img_shape = img_shape.shape
+    label_shape = label_shape.shape
     print('Start generating keep table with keep prop %f...' % config['keep_prop'])
     KeepTable, RemoveTable = generate_keep_table(FullDset['labels'][:], config['keep_prop'])
 
@@ -85,8 +87,7 @@ def run(config):
         print("Unlabeled dataset with chunk size %i for imgs, %i for labels" %
               (uimgs_dset.chunks, ulabels_dset.chunks))
     for index in KeepTable:
-        x = FullDset['imgs'][index]
-        y = FullDset['labels'][index]
+        x, y = FullDset[index]
         x = np.expand_dims(x, 0)
         y = np.expand_dims(y, 0)
         with h5.File(config['result_dir'] + '/ILSVRC128_%d.hdf5'.format(config['keep_prop']), 'a') as f:
