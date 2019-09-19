@@ -2,7 +2,6 @@ import os
 import sys
 from argparse import ArgumentParser
 import h5py as h5
-sys.path.append('..')
 from utils import get_data_loaders
 
 import numpy as np
