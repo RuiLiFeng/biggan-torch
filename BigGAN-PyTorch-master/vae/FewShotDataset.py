@@ -40,6 +40,7 @@ def generate_keep_table(labels, keep_prop):
             perm = torch.randperm(class_length) + start
             keep_table.append(perm[:int(keep_prop * class_length)])
             remove_table.append(perm[int(keep_prop * class_length):])
+            start = i
     keep_table = torch.cat(keep_table)
     remove_table = torch.cat(remove_table)
     return keep_table, remove_table

@@ -126,6 +126,7 @@ def generate_keep_table(labels, keep_prop):
             keep = np.random.choice(indexs, size=int(keep_prop * len(indexs)))
             keep_table.append(keep)
             remove_table.append([index for index in indexs if index not in keep])
+            start = i
     keep_table = np.concatenate(keep_table)
     remove_table = np.concatenate(remove_table)
     return keep_table, remove_table
